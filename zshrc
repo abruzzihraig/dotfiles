@@ -19,6 +19,7 @@ alias ls="gls\ --color"
 alias ipp="dig @208.67.222.222 myip.opendns.com +short"
 alias vo="vim -O"
 alias voa="vim -O *"
+alias faker="faker-cli -L zh_CN"
 alias git="hub"
 alias gbo="git browse"
 alias fuck='eval $(thefuck $(fc -ln -1))'
