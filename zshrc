@@ -1,16 +1,6 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
-# antigen
-source "$HOME/.antigen/antigen.zsh"
-antigen-use oh-my-zsh
-antigen-bundle arialdomartini/oh-my-git
-antigen-bundle git
-antigen-bundle zsh-users/zsh-syntax-highlighting
-antigen-bundle zsh-users/zsh-history-substring-search
-antigen theme arialdomartini/oh-my-git-themes oppa-lana-style
-antigen-apply
-
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -32,8 +22,17 @@ alias voa="vim -O *"
 alias git="hub"
 alias gbo="git browse"
 alias fuck='eval $(thefuck $(fc -ln -1))'
+alias v='vim $(fzf)'
+alias io='iojs'
+alias proxynow='export https_proxy=127.0.0.1:12441 & export http_proxy=127.0.0.1:12441'
+alias tryproxy='curl -o /dev/null www.google.com'
+alias px4='proxychains4'
 # replace recursively with sed
 alias rep='function _replace(){ eval "find . -type f -name \"*.$1\" -exec sed -i \"\" s/$2/$3/g {} +";};_replace'
+alias repall='function _replaceAll(){ eval "LC_ALL=C find . -type f -name \"*\" -exec sed -i \"\" s/$1/$2/g {} +";};_replaceAll'
+alias repicon='function _replaceAll(){ eval "LC_ALL=C find . -type f -name \"*\" -exec sed -i \"\" s/icon-$1/icon-$2/g {} +";};_replaceAll'
+alias pyserver='python -m SimpleHTTPServer 8000'
+alias uploadstock='scp -r /Users/abruzzi/Company/jimustock-dashboard/dist node.jm:/home/heyang/jimustock'
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -74,6 +73,9 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+# git-radar
+export PROMPT="$PROMPT$(git-radar --zsh --fetch) "
+
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -89,13 +91,12 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-
+#
 [[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh # This loads NVM
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 source ~/.nvm/nvm.sh
-nvm alias default 0.10.26
+nvm alias default 0.12.2
 # xcode theme
 DRACULA_THEME=/Users/abruzzi/Public/dracula-theme
 export DRACULA_THEME
@@ -103,9 +104,16 @@ export DRACULA_THEME
 PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH"
 PATH="/Applications/Emacs.app/Contents/MacOS/Emacs-10.7:$PATH"
 
+# PhantomJS Enviroment
+# PHANTOMJS_BIN=/usr/local/Cellar/phantomjs/2.0.0/bin
+PHANTOMJS_BIN=/usr/local/bin/phantomjs
+export PHANTOMJS_BIN
+PATH=$PATH:$PHANTOMJS_BIN
+
 # Java Environment
 JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home
 export JAVA_HOME
+PATH=$PATH:$JAVA_HOME
 JIMUBOX_SETTINGS_FILE=/Users/abruzzi/Company/jimubox-migration/jimubox_settings.properties
 export JIMUBOX_SETTINGS_FILE
 PATH=$PATH:$JIMUBOX_SETTINGS_FILE
@@ -119,65 +127,17 @@ PATH=$PATH:$ACTIVATOR
 # export IDEA
 # PATH=$PATH:$IDEA
 . /Users/abruzzi/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-###-begin-nativescript-completion-###
-if complete &>/dev/null; then
-  _nativescript_completion () {
-    local si="$IFS"
-    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
-                           COMP_LINE="$COMP_LINE" \
-                           COMP_POINT="$COMP_POINT" \
-                           nativescript completion -- "${COMP_WORDS[@]}" \
-                           2>/dev/null)) || return $?
-    IFS="$si"
-  }
-  complete -F _nativescript_completion -o default nativescript
-elif compctl &>/dev/null; then
-  _nativescript_completion () {
-    local cword line point words si
-    read -Ac words
-    read -cn cword
-    let cword-=1
-    read -l line
-    read -ln point
-    si="$IFS"
-    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
-                       COMP_LINE="$line" \
-                       COMP_POINT="$point" \
-                       nativescript completion -- "${words[@]}" \
-                       2>/dev/null)) || return $?
-    IFS="$si"
-  }
-  compctl -K _nativescript_completion -f nativescript
-fi
-###-end-nativescript-completion-######-begin-tns-completion-###
-if complete &>/dev/null; then
-  _tns_completion () {
-    local si="$IFS"
-    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
-                           COMP_LINE="$COMP_LINE" \
-                           COMP_POINT="$COMP_POINT" \
-                           tns completion -- "${COMP_WORDS[@]}" \
-                           2>/dev/null)) || return $?
-    IFS="$si"
-  }
-  complete -F _tns_completion -o default tns
-elif compctl &>/dev/null; then
-  _tns_completion () {
-    local cword line point words si
-    read -Ac words
-    read -cn cword
-    let cword-=1
-    read -l line
-    read -ln point
-    si="$IFS"
-    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
-                       COMP_LINE="$line" \
-                       COMP_POINT="$point" \
-                       tns completion -- "${words[@]}" \
-                       2>/dev/null)) || return $?
-    IFS="$si"
-  }
-  compctl -K _tns_completion -f tns
-fi
-###-end-tns-completion-###
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Added by termtile (https://github.com/apaszke/termtile)
+alias ul='osascript ~/.termtile/tile.scpt up left'
+alias ur='osascript ~/.termtile/tile.scpt up right'
+alias dl='osascript ~/.termtile/tile.scpt down left'
+alias dr='osascript ~/.termtile/tile.scpt down right'
+alias ll='osascript ~/.termtile/tile.scpt left'
+alias rr='osascript ~/.termtile/tile.scpt right'
+alias up='osascript ~/.termtile/tile.scpt up'
+alias down='osascript ~/.termtile/tile.scpt down'
+alias big='osascript ~/.termtile/resize.scpt '
+alias cen='osascript ~/.termtile/center.scpt '
+alias max='osascript ~/.termtile/maximize.scpt '

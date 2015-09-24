@@ -34,6 +34,10 @@ Plug 'git@github.com:tpope/vim-fugitive.git'
 Plug 'git@github.com:tpope/vim-repeat.git'
 Plug 'git@github.com:scrooloose/syntastic.git'
 Plug 'git@github.com:mxw/vim-jsx.git'
+Plug 'git@github.com:marijnh/tern_for_vim.git'
+Plug 'git@github.com:isRuslan/vim-es6.git'
+Plug 'junegunn/vim-peekaboo'
+Plug 'git@github.com:kana/vim-textobj-user.git'
 call plug#end()
 
 syntax enable
