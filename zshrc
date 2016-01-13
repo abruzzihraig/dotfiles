@@ -19,7 +19,6 @@ alias ls="gls\ --color"
 alias ipp="dig @208.67.222.222 myip.opendns.com +short"
 alias vo="vim -O"
 alias voa="vim -O *"
-alias faker="faker-cli -L zh_CN"
 alias git="hub"
 alias gbo="git browse"
 alias fuck='eval $(thefuck $(fc -ln -1))'
@@ -31,9 +30,12 @@ alias px4='proxychains4'
 # replace recursively with sed
 alias rep='function _replace(){ eval "find . -type f -name \"*.$1\" -exec sed -i \"\" s/$2/$3/g {} +";};_replace'
 alias repall='function _replaceAll(){ eval "LC_ALL=C find . -type f -name \"*\" -exec sed -i \"\" s/$1/$2/g {} +";};_replaceAll'
-alias repicon='function _replaceAll(){ eval "LC_ALL=C find . -type f -name \"*\" -exec sed -i \"\" s/icon-$1/icon-$2/g {} +";};_replaceAll'
+alias repicon='function _replaceIcon(){ eval "LC_ALL=C find . -type f -name \"*\" -exec sed -i \"\" s/icon-$1/icon-$2/g {} +";};_replaceIcon'
 alias pyserver='python -m SimpleHTTPServer 8000'
-alias uploadstock='scp -r /Users/abruzzi/Company/jimustock-dashboard/dist node.jm:/home/heyang/jimustock'
+# alias uploadstock='scp -r /Users/abruzzi/Company/jimustock-dashboard/dist node.jm:/home/heyang/jimustock'
+alias stocktest='cd /Users/abruzzi/Company/jimustock-dashboard/ && gulp build -e test && rsync -rvIP --stats ./dist/* jimustock:/var/www/jimustock-test'
+alias stockprod='cd /Users/abruzzi/Company/jimustock-dashboard/ && gulp dist -e prod && rsync -rvIP --stats ./dist/* jimustock:/var/www/jimustock-prod'
+alias gbauther="git for-each-ref --format='%(committerdate) %09 %(authorname) %09 %(refname)' | sort -k5n -k2M -k3n -k4n"
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 

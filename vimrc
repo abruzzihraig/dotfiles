@@ -3,6 +3,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-sensible'
+Plug 'rstacruz/vim-hyperstyle'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'git@github.com:bling/vim-airline'
 Plug 'git@github.com:kien/ctrlp.vim.git'
@@ -38,6 +39,8 @@ Plug 'git@github.com:marijnh/tern_for_vim.git'
 Plug 'git@github.com:isRuslan/vim-es6.git'
 Plug 'junegunn/vim-peekaboo'
 Plug 'git@github.com:kana/vim-textobj-user.git'
+Plug 'git@github.com:terryma/vim-multiple-cursors.git'
+Plug 'git@github.com:kien/rainbow_parentheses.vim.git'
 call plug#end()
 
 syntax enable
@@ -98,3 +101,28 @@ autocmd VimEnter * nested CottidieTip
 
 " let g:user_emmet_expandabbr_key = '<Tab>'
 " tabstop, shiftwidth, softtabstop
+
+" Rainbow
+let g:rbpt_colorpairs = [
+    \ ['black',       'SeaGreen3'],
+    \ ['brown',       'RoyalBlue3'],
+    \ ['brown',       'firebrick3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ]
+
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
