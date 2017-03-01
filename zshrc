@@ -8,6 +8,13 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="agnoster"
 
 # aliases
+alias vim="mvim"
+alias zshconfig="mate ~/.zshrc"
+alias ohmyzsh="mate ~/.oh-my-zsh"
+alias mig="mvn clean compile install -Dmaven.test.skip=true"
+alias mit="mvn tomcat7:run"
+alias vo="vim -O"
+alias voa="vim -O *"
 alias zshconfig="mate ~/.zshrc"
 alias ohmyzsh="mate ~/.oh-my-zsh"
 alias mig="mvn clean compile install -U -Dmaven.test.skip=true"
@@ -19,23 +26,29 @@ alias ls="gls\ --color"
 alias ipp="dig @208.67.222.222 myip.opendns.com +short"
 alias vo="vim -O"
 alias voa="vim -O *"
-alias git="hub"
+alias faker="faker-cli -L zh_CN"
 alias gbo="git browse"
+alias ghci='stack ghci'
 alias fuck='eval $(thefuck $(fc -ln -1))'
 alias v='vim $(fzf)'
 alias io='iojs'
-alias proxynow='export https_proxy=127.0.0.1:12441 & export http_proxy=127.0.0.1:12441'
+alias ls='ls -G'
 alias tryproxy='curl -o /dev/null www.google.com'
 alias px4='proxychains4'
+
 # replace recursively with sed
 alias rep='function _replace(){ eval "find . -type f -name \"*.$1\" -exec sed -i \"\" s/$2/$3/g {} +";};_replace'
 alias repall='function _replaceAll(){ eval "LC_ALL=C find . -type f -name \"*\" -exec sed -i \"\" s/$1/$2/g {} +";};_replaceAll'
-alias repicon='function _replaceIcon(){ eval "LC_ALL=C find . -type f -name \"*\" -exec sed -i \"\" s/icon-$1/icon-$2/g {} +";};_replaceIcon'
-alias pyserver='python -m SimpleHTTPServer 8000'
-# alias uploadstock='scp -r /Users/abruzzi/Company/jimustock-dashboard/dist node.jm:/home/heyang/jimustock'
-alias stocktest='cd /Users/abruzzi/Company/jimustock-dashboard/ && gulp build -e test && rsync -rvIP --stats ./dist/* jimustock:/var/www/jimustock-test'
-alias stockprod='cd /Users/abruzzi/Company/jimustock-dashboard/ && gulp dist -e prod && rsync -rvIP --stats ./dist/* jimustock:/var/www/jimustock-prod'
+alias repicon='function _replaceAll(){ eval "LC_ALL=C find . -type f -name \"*\" -exec sed -i \"\" s/icon-$1/icon-$2/g {} +";};_replaceAll'
+alias pyserver='python -m SimpleHTTPServer 8090'
+alias gs='function _gs() {git grep -ni $1 | fpp};_gs'
+alias sw='python ~/.switchKeyboard.py'
+alias yor='function _yoReact(){eval "yo react-webpack-redux:$1 $2";};_yoReact'
+alias webpackanalyse='webpack --json | webpack-bundle-size-analyzer'
 alias gbauther="git for-each-ref --format='%(committerdate) %09 %(authorname) %09 %(refname)' | sort -k5n -k2M -k3n -k4n"
+
+# alias dayone='/usr/local/bin/dayone -j=~/Library/Group\ Containers/5U8NS4GX82.dayoneapp2/Data/Auto\ Import/Default\ Journal.dayone'
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -70,16 +83,14 @@ alias gbauther="git for-each-ref --format='%(committerdate) %09 %(authorname) %0
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git mvn osx autojump cp brew colorize atom sublime)
-
+plugins=(git autojump osx mvn cp brew colorize emoji-clock atom sublime zsh_reload)
+alias subl 'open -a Sublime\ Text'
 source $ZSH/oh-my-zsh.sh
+
 
 # User configuration
 
-# git-radar
-export PROMPT="$PROMPT$(git-radar --zsh --fetch) "
-
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/opt/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # # Preferred editor for local and remote sessions
@@ -94,53 +105,30 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
-#
-[[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh # This loads NVM
+
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-source ~/.nvm/nvm.sh
-nvm alias default 0.12.2
-# xcode theme
-DRACULA_THEME=/Users/abruzzi/Public/dracula-theme
-export DRACULA_THEME
-
 PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH"
 PATH="/Applications/Emacs.app/Contents/MacOS/Emacs-10.7:$PATH"
 
-# PhantomJS Enviroment
-# PHANTOMJS_BIN=/usr/local/Cellar/phantomjs/2.0.0/bin
-PHANTOMJS_BIN=/usr/local/bin/phantomjs
-export PHANTOMJS_BIN
-PATH=$PATH:$PHANTOMJS_BIN
+ANDROID_HOME=/Users/abruzzi/Public/android-sdk-macosx
+export ANDROID_HOME
+export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
-# Java Environment
-JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home
+export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
+
+# dracula theme for xcode
+DRACULA_THEME=/Users/abruzzi/Repo/dracula-theme
+export DRACULA_THEME
+
+# java environments
+JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_55.jdk/Contents/Home
 export JAVA_HOME
-PATH=$PATH:$JAVA_HOME
-JIMUBOX_SETTINGS_FILE=/Users/abruzzi/Company/jimubox-migration/jimubox_settings.properties
-export JIMUBOX_SETTINGS_FILE
-PATH=$PATH:$JIMUBOX_SETTINGS_FILE
-JIMUBOX_ENVIRONMENTS_FILE=$HOME/Company/jimubox-migration/jimubox_environments.properties
-export JIMUBOX_ENVIRONMENTS_FILE
-PATH=$PATH:$JIMUBOX_ENVIRONMENTS_FILE
-ACTIVATOR=$HOME/Public/activator-1.2.2
-export ACTIVATOR
-PATH=$PATH:$ACTIVATOR
-# IDEA=/Applications/IntelliJ\ IDEA\ 13.app/Contents/MacOS
-# export IDEA
-# PATH=$PATH:$IDEA
-. /Users/abruzzi/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Added by termtile (https://github.com/apaszke/termtile)
-alias ul='osascript ~/.termtile/tile.scpt up left'
-alias ur='osascript ~/.termtile/tile.scpt up right'
-alias dl='osascript ~/.termtile/tile.scpt down left'
-alias dr='osascript ~/.termtile/tile.scpt down right'
-alias ll='osascript ~/.termtile/tile.scpt left'
-alias rr='osascript ~/.termtile/tile.scpt right'
-alias up='osascript ~/.termtile/tile.scpt up'
-alias down='osascript ~/.termtile/tile.scpt down'
-alias big='osascript ~/.termtile/resize.scpt '
-alias cen='osascript ~/.termtile/center.scpt '
-alias max='osascript ~/.termtile/maximize.scpt '
+PATH=$PATH:${GOPATH//://bin:}/bin
+
+# svn enviroments
+export SVN_EDITOR=vim
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval $(/usr/libexec/path_helper -s)
