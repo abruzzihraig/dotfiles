@@ -1,0 +1,16 @@
+{
+    "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontSize": 14,
+    "editor.fontLigatures": true,
+    "vim.useSystemClipboard": true,
+    "vim.easymotion": true,
+    "http.proxyStrictSSL": false,
+    "http.proxy": "http://127.0.0.1:6151",
+    "extensions.autoUpdate": true,
+    "terminal.external.osxExec": "iTerm.app",
+    "window.zoomLevel": 1,
+    "htmlhint.options": {
+        "attr-lowercase": false,
+        "doctype-first": false
+    }
+}
