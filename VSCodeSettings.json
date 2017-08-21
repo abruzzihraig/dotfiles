@@ -1,16 +1,36 @@
 {
-    "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
-    "editor.fontSize": 14,
-    "editor.fontLigatures": true,
-    "vim.useSystemClipboard": true,
-    "vim.easymotion": true,
     "http.proxyStrictSSL": false,
-    "http.proxy": "http://127.0.0.1:6151",
     "extensions.autoUpdate": true,
     "terminal.external.osxExec": "iTerm.app",
-    "window.zoomLevel": 1,
+    "http.proxy": "http://127.0.0.1:6151",
+    "vim.useSystemClipboard": true,
+    "vim.easymotion": true,
+    "editor.fontSize": 14,
+    "window.zoomLevel": 0,
+    "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontLigatures": true,
     "htmlhint.options": {
         "attr-lowercase": false,
         "doctype-first": false
-    }
+    },
+    "vsicons.projectDetection.autoReload": true,
+    "workbench.iconTheme": "vscode-icons",
+    "workbench.colorTheme": "One Dark Pro",
+    "vim.disableAnnoyingNeovimMessage": true,
+    "typescript.tsdk": "./node_modules/typescript/lib",
+    "todohighlight.keywords": [
+        "DEBUG:",
+        "REVIEW:",
+        {
+            "text": "NOTE:",
+            "color": "#ff0000",
+            "backgroundColor": "purple",
+            "overviewRulerColor": "grey"
+        },
+        {
+            "text": "HACK:",
+            "color": "#000",
+            "isWholeLine": false
+        }
+    ]
 }
